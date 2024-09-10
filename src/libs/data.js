@@ -14,6 +14,8 @@ export const login = async ({ username, password }) => {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + 30);
 
+      console.log(expiryDate, "<----dilogin");
+
       Cookies.set("token", res.data.token, {
         expires: expiryDate,
         secure: true,

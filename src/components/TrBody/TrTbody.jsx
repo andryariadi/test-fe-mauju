@@ -6,7 +6,6 @@ import { HiViewGrid } from "react-icons/hi";
 import UpdateUser from "../UpdateUser/UpdateUser";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Link from "next/link";
 import { notFound, useRouter } from "next/navigation";
 import { deleteUser, getUsersById } from "src/libs/data";
 import useUserStore from "src/libs/storeUser";
@@ -38,8 +37,8 @@ const TrBody = () => {
   };
 
   const handleDeleteClick = async (id) => {
-    if (currentUser?.id !== id) {
-      toast.error("You are not allowed to delete this user!");
+    if (currentUser?.role !== "admin") {
+      toast.error("You are not admin, you cannot delete user!");
       return;
     }
 

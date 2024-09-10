@@ -18,7 +18,7 @@ export default async function Home() {
     console.log(error.message);
   }
 
-  // console.log({ user, token }, "<---dihomepage");
+  console.log({ user, token }, "<---dihomepage");
 
   return (
     <>
