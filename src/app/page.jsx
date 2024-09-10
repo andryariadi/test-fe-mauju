@@ -35,7 +35,7 @@ export default async function Home() {
           <Header />
           <div className="flex flex-col gap-3">
             <AddUser />
-            <TableUser />
+            <TableUser user={user} />
           </div>
         </main>
       </section>

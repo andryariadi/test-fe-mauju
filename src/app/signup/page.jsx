@@ -1,0 +1,136 @@
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { CiUser } from "react-icons/ci";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+import { login } from "src/libs/data";
+import { z } from "zod";
+import Cookie from "js-cookie";
+import useAuthStore from "src/libs/storeAuth";
+
+const loginSchema = z.object({
+  username: z.string().min(1, { message: "Username is required!" }),
+  password: z.string().min(1, { message: "Password is required!" }),
+});
+
+const SignupPage = () => {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const { setAuth } = useAuthStore();
+
+  useEffect(() => {
+    const token = Cookie.get("token");
+    if (token) {
+      router.push("/");
+    }
+  }, [router]);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const user = await login(data);
+      setAuth(user);
+      router.push("/");
+      toast.success("Sign up successful!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Sign up failed!");
+    }
+  };
+
+  return (
+    <section className="bg-ros-500 bg-slat-200 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-screen flex items-center justify-center">
+      <div className="dark:bg-n-7 bg-white shadow-md w-1/2 h-[70%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
+        {/* Form */}
+        <form onSubmit={handleSubmit(onSubmit)} className="p-6 flex flex-col gap-10 w-full">
+          <div>
+            <h1 className="text-2xl font-semibold">
+              Sign Up to <span className="text-logo">iProc</span>
+            </h1>
+            <span className="text-xs text-n-3">Sistem pengadaan barang dan jasa elektronik</span>
+          </div>
+
+          <div className="flex flex-col gap-2 relative">
+            <label htmlFor="username" className="text-sm text-n-3">
+              Username
+            </label>
+            <div className="flex items-center rounded-lg dark:bg-n-7 bg-neutral-100 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
+              <input
+                type="text"
+                id="username"
+                name="username"
+                {...register("username")}
+                placeholder="Username"
+                className="w-full p-4 rounded-s-lg dark:bg-n-7 bg-neutral-100 outline-none placeholder:text-xs placeholder:text-n-4/60 text-xs"
+              />
+              <CiUser size={35} className="pe-3 text-n-4/60" />
+            </div>
+            {errors.username && <span className="text-rose-500 text-xs absolute -bottom-5">{errors.username.message}</span>}
+          </div>
+
+          <div className="flex flex-col gap-2 relative">
+            <label htmlFor="password" className="text-sm text-n-3">
+              Password
+            </label>
+            <div className="flex items-center rounded-lg dark:bg-n-7 bg-neutral-100 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                {...register("password")}
+                placeholder="Enter your password"
+                className="w-full p-4 rounded-lg dark:bg-n-7 bg-neutral-100 outline-none placeholder:text-xs placeholder:text-n-4/60 text-xs"
+              />
+              <div className="bg-ros-500 flex items-center cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                {!showPassword ? (
+                  <button type="button">
+                    <IoEyeOutline size={35} className="pe-3 text-n-4/60" />
+                  </button>
+                ) : (
+                  <button type="button">
+                    <IoEyeOffOutline size={35} className="pe-3 text-n-4/60" />
+                  </button>
+                )}
+              </div>
+            </div>
+            {errors.password && <span className="text-rose-500 text-xs absolute -bottom-5">{errors.password.message}</span>}
+          </div>
+
+          <button disabled={isSubmitting} type="submit" className="p-3 rounded-md bg-logo text-n-1 w-full">
+            {isSubmitting ? "Signing..." : "Sign Up"}
+          </button>
+        </form>
+
+        {/* Has Account */}
+        <div className="dark:bg-n-8 bg-white py-4 flex items-center justify-center">
+          <p>
+            Already have an account?{" "}
+            <Link href="/login" className="text-logo">
+              Login
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      {/* Image */}
+      <div className="bg-tal-500 relative w-1/2 h-[65%] ml-3">
+        <Image src="/signup.svg" alt="Login" fill className="object-contain lg:object-cover" />
+      </div>
+    </section>
+  );
+};
+
+export default SignupPage;

@@ -9,7 +9,7 @@ import useSearchStore from "src/libs/storeSearch";
 import useSortStore from "src/libs/storeSort";
 import { getUsers, searchUsers, sortUsers } from "src/libs/data";
 
-const TableUser = () => {
+const TableUser = ({ user }) => {
   const { setUsers, users } = useUserStore();
   const { query } = useSearchStore();
   const { input } = useSortStore();
@@ -61,7 +61,7 @@ const TableUser = () => {
         </thead>
         <tbody className="b-amber-500 text-md font-mono">
           <Suspense fallback={<Loading />}>
-            <TrTbody />
+            <TrTbody user={user} />
           </Suspense>
         </tbody>
       </table>

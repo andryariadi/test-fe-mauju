@@ -11,13 +11,17 @@ import { deleteUser, getUsersById } from "src/libs/data";
 import useUserStore from "src/libs/storeUser";
 import useAuthStore from "src/libs/storeAuth";
 
-const TrBody = () => {
+const TrBody = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
   const router = useRouter();
 
   const { users, removeUser } = useUserStore();
-  const { currentUser } = useAuthStore();
+  const { setAuth, currentUser } = useAuthStore();
+
+  useEffect(() => {
+    setAuth(user);
+  }, [user, setAuth]);
 
   useEffect(() => {
     if (users) return;

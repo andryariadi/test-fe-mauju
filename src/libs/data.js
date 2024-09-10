@@ -19,6 +19,7 @@ export const login = async ({ username, password }) => {
       Cookies.set("token", res.data.token, {
         expires: expiryDate,
         secure: true,
+        sameSite: "strict",
       });
 
       return res.data;
