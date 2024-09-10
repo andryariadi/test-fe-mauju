@@ -21,7 +21,9 @@ const schema = z.object({
   gender: z.string().min(1, { message: "Gender is required!" }),
   email: z.string().email().min(1, { message: "Email is required!" }),
   password: z.string().min(1, { message: "Password is required!" }).min(5, { message: "Password must be at least 5 characters" }),
-  address: z.string().min(1, { message: "Address is required!" }),
+  address: z.object({
+    address: z.string().min(1, { message: "Address is required!" }),
+  }),
   phone: z.string().min(1, { message: "Phone is required!" }),
 });
 
@@ -41,9 +43,10 @@ const UserForm = ({ isOpen, setIsOpen }) => {
   });
 
   const onSubmit = async (data) => {
+    console.log(data, "<----diuserform");
+
     try {
       const newUser = await createUser(data);
-      // setUsers([newUser, ...users]); // jika hanya menggunakan setUsers di useUserStore
       addUser(newUser);
       toast.success("User created successfully!");
     } catch (error) {
@@ -145,10 +148,10 @@ const UserForm = ({ isOpen, setIsOpen }) => {
               <input
                 data-testid="address"
                 type="text"
-                name="address"
+                name="address.address"
                 placeholder="Jl..."
                 className="flex-1 p-4 rounded-s-lg dark:bg-n-7 bg-neutral-200 outline-none  placeholder:text-xs placeholder:text-n-4/60 text-xs"
-                {...register("address")}
+                {...register("address.address")}
               />
               <CiLocationOn size={35} className="pe-3 text-n-4/60" />
             </div>
