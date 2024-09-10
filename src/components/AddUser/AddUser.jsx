@@ -4,15 +4,30 @@ import { useState } from "react";
 import { IoPersonAddSharp } from "react-icons/io5";
 import useSortStore from "src/libs/storeSort";
 import UserForm from "../UserForm/UserForm";
+import useAuthStore from "src/libs/storeAuth";
+import toast from "react-hot-toast";
 
 const AddUser = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { input, setInput } = useSortStore();
 
+  const { currentUser } = useAuthStore();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setInput({ [name]: value });
   };
+
+  const handleAddUserClick = async () => {
+    if (currentUser?.role !== "admin") {
+      toast.error("You are not admin, you cannot add user!");
+      return;
+    }
+
+    setIsOpen(!isOpen);
+  };
+
+  console.log(currentUser, "<---diadduser");
 
   return (
     <>
@@ -53,7 +68,7 @@ const AddUser = () => {
             <option value="desc">Desc</option>
           </select>
 
-          <IoPersonAddSharp size={20} data-testid="add-user-icon" className="cursor-pointer hover:text-logo transition-all duration-300" onClick={() => setIsOpen(!isOpen)} />
+          <IoPersonAddSharp size={20} data-testid="add-user-icon" className="cursor-pointer hover:text-logo transition-all duration-300" onClick={handleAddUserClick} />
         </div>
       </div>
 
