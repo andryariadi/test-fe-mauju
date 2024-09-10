@@ -17,7 +17,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.className} dark:bg-n-8 bg-neutral-200 dark:text-white text-n-7`}>
+      <body className={`${poppins.className} dark:bg-n-8 bg-neutral-200 dark:text-white text-n-7 h-[150dvh] md:h-screen`}>
         <Providers>
           <QueryClientProvider>
             {children}

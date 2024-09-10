@@ -39,6 +39,7 @@ export const getAuth = async (token) => {
         Authorization: `Bearer ${token}`,
       },
     });
+
     return res.data;
   } catch (error) {
     console.error("Failed to retrieve user data:", error.message);

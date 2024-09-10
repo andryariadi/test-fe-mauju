@@ -54,15 +54,16 @@ const LoginPage = () => {
 
   return (
     <>
-      <section className="bg-ros-500 bg-slat-200 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-screen flex items-center justify-center">
+      <section className="bg-ros-500 bg-slat-200 px-4 py-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-full flex flex-col md:flex-row md:justify-center md:items-center">
         {/* Image */}
-        <div className="bg-tal-500 relative w-1/2 h-[65%]">
+        <div className="bg-tal-500 relative w-full md:w-1/2 min-h-[40%] md:h-[65%] md:ml-3">
           <Image src="/login.svg" alt="Login" fill className="object-contain lg:object-cover" />
         </div>
 
-        <div className="dark:bg-n-7 bg-white shadow-md w-1/2 h-[70%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
+        {/* Form container */}
+        <div className="dark:bg-n-7 bg-white shadow-md w-full md:w-1/2 max-h-[60%] md:min-h-[35%] lg:min-h-[85%] xl:min-h-[70%] 2xl:min-h-[75%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className=" flex flex-col gap-10 w-full p-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
             <div>
               <h1 className="text-2xl font-semibold">
                 Login to <span className="text-logo">iProc</span>
