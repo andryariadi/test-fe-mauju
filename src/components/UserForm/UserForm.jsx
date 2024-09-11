@@ -15,6 +15,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createUser } from "src/libs/data";
 import useUserStore from "src/libs/storeUser";
+import useAddUser from "src/hooks/useAddUser";
 
 const schema = z.object({
   username: z.string().min(1, { message: "Username is required!" }),
@@ -29,10 +30,10 @@ const schema = z.object({
 
 const UserForm = ({ isOpen, setIsOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
-
   const router = useRouter();
 
   const { addUser } = useUserStore();
+  const { createUserForm } = useAddUser();
 
   const {
     register,
@@ -42,17 +43,9 @@ const UserForm = ({ isOpen, setIsOpen }) => {
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data) => {
+  const handleSubmitUser = async (data) => {
     console.log(data, "<----diuserform");
-
-    try {
-      const newUser = await createUser(data);
-      addUser(newUser);
-      toast.success("User created successfully!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Failed to create user!");
-    }
+    await createUserForm(data);
   };
 
   const handleClose = () => {
@@ -62,7 +55,7 @@ const UserForm = ({ isOpen, setIsOpen }) => {
 
   return (
     <div className="bg-n-8/40 backdrop-blur absolute inset-0 z-50 flex items-center justify-center">
-      <form role="form" onSubmit={handleSubmit(onSubmit)} className="relative dark:bg-n-7 bg-white flex flex-col gap-10 w-1/2 p-6 border border-n-1/10 rounded-md">
+      <form role="form" onSubmit={handleSubmit(handleSubmitUser)} className="relative dark:bg-n-7 bg-white flex flex-col gap-10 w-1/2 p-6 border border-n-1/10 rounded-md">
         <div>
           <h1 className="text-2xl font-semibold" data-testid="add-user">
             Add <span className="text-logo">User</span>
