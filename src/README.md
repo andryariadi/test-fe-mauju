@@ -1,5 +1,7 @@
 iProc adalah web-app untuk management users
 
+link deploy: https://iproc-andryariadi.vercel.app
+
 Tech stack:
 Language: JavaScript
 Frontend: React Js, Next Js, Zustand, React Hook Form, Zod, Axios, React Query, Tailwind
@@ -13,6 +15,7 @@ Feature:
 3. CRUD users
 4. Sort
 5. Search
+6. Responsive
 
 How to use the application:
 
