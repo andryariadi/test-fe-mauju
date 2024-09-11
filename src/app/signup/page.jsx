@@ -12,7 +12,8 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { login } from "src/libs/data";
 import { z } from "zod";
 import Cookie from "js-cookie";
-import useAuthStore from "src/libs/storeAuth";
+import useSignup from "src/hooks/useSignup";
+// import useAuthStore from "src/libs/storeAuth";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: "Username is required!" }),
@@ -22,7 +23,9 @@ const loginSchema = z.object({
 const SignupPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { setAuth } = useAuthStore();
+  // const { setAuth } = useAuthStore();
+
+  const { signupForm } = useSignup();
 
   useEffect(() => {
     const token = Cookie.get("token");
@@ -39,16 +42,10 @@ const SignupPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const user = await login(data);
-      setAuth(user);
-      router.push("/");
-      toast.success("Sign up successful!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Sign up failed!");
-    }
+  const handleSubmitSignup = async (data) => {
+    await signupForm(data);
+
+    router.push("/");
   };
 
   return (
@@ -56,7 +53,7 @@ const SignupPage = () => {
       {/* Form Container */}
       <div className="dark:bg-n-7 bg-white shadow-md w-full md:w-1/2 max-h-[60%] md:min-h-[35%] lg:min-h-[85%] xl:min-h-[70%] 2xl:min-h-[75%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
         {/* Form */}
-        <form onSubmit={handleSubmit(onSubmit)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
+        <form onSubmit={handleSubmit(handleSubmitSignup)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
           <div>
             <h1 className="text-2xl font-semibold">
               Sign Up to <span className="text-logo">iProc</span>

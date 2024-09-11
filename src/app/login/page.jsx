@@ -14,6 +14,7 @@ import { z } from "zod";
 import Cookie from "js-cookie";
 import useAuthStore from "src/libs/storeAuth";
 import Link from "next/link";
+import useLogin from "src/hooks/useLogin";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: "Username is required!" }),
@@ -23,7 +24,9 @@ const loginSchema = z.object({
 const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const { setAuth } = useAuthStore();
+  // const { setAuth } = useAuthStore();
+
+  const { loginForm } = useLogin();
 
   useEffect(() => {
     const token = Cookie.get("token");
@@ -40,16 +43,10 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const user = await login(data);
-      setAuth(user);
-      router.push("/");
-      toast.success("Login successful!");
-    } catch (error) {
-      console.log(error);
-      toast.error("Login failed!");
-    }
+  const handleSubmitLogin = async (data) => {
+    await loginForm(data);
+
+    router.push("/");
   };
 
   return (
@@ -63,7 +60,7 @@ const LoginPage = () => {
         {/* Form container */}
         <div className="dark:bg-n-7 bg-white shadow-md w-full md:w-1/2 max-h-[60%] md:min-h-[35%] lg:min-h-[85%] xl:min-h-[70%] 2xl:min-h-[75%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
           {/* Form */}
-          <form onSubmit={handleSubmit(onSubmit)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
+          <form onSubmit={handleSubmit(handleSubmitLogin)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
             <div>
               <h1 className="text-2xl font-semibold">
                 Login to <span className="text-logo">iProc</span>
