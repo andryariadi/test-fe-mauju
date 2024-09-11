@@ -31,17 +31,17 @@ const AddUser = () => {
 
   return (
     <>
-      <div className="bg-tal-600 border-b border-n-1/10 px-5 py-2 w-[90%] flex items-center justify-between">
-        <h1 className="text-xl">User Lists</h1>
+      <div className="b-teal-600 border-b border-n-1/10 px-5 py-2 w-full flex items-center justify-between gap-5">
+        <h1 className="text-md md:text-xl">User Lists</h1>
 
-        <div className="flex items-center gap-5">
+        <div className="b-violet-500 flex items-center justify-between gap-2 md:gap-5">
           <select
             id=""
             name="sort"
             aria-label="Sort By"
             value={input.sort}
             onChange={handleInputChange}
-            className="dark:bg-n-7 bg-white backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs dark:text-n-3 text-n-4 border dark:border-n-1/10 border-n-2 transition-all duration-500 ease-in-out dark:hover:border-logo cursor-pointer"
+            className="dark:bg-n-7 bg-white backdrop-blur-md py-2 px-2 md:px-4 rounded-2xl font-medium text-xs dark:text-n-3 text-n-4 border dark:border-n-1/10 border-n-2 transition-all duration-500 ease-in-out dark:hover:border-logo cursor-pointer"
           >
             <option value="" disabled>
               Sort By
@@ -59,7 +59,7 @@ const AddUser = () => {
             aria-label="Order By"
             value={input.order}
             onChange={handleInputChange}
-            className="dark:bg-n-7 bg-white backdrop-blur-md py-2 px-4 rounded-2xl font-medium text-xs dark:text-n-3 text-n-4 border dark:border-n-1/10 border-n-2 transition-all duration-500 ease-in-out dark:hover:border-logo cursor-pointer"
+            className="dark:bg-n-7 bg-white backdrop-blur-md py-2 px-2 md:px-4 rounded-2xl font-medium text-xs dark:text-n-3 text-n-4 border dark:border-n-1/10 border-n-2 transition-all duration-500 ease-in-out dark:hover:border-logo cursor-pointer"
           >
             <option value="" disabled>
               Order By
