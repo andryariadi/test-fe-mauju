@@ -54,7 +54,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <section className="bg-ros-500 bg-slat-200 px-4 py-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-full flex flex-col md:flex-row md:justify-center md:items-center">
+      <section className="bg-ros-500 px-4 py-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-full flex flex-col md:flex-row md:justify-center md:items-center">
         {/* Image */}
         <div className="bg-tal-500 relative w-full md:w-1/2 min-h-[40%] md:h-[65%] md:ml-3">
           <Image src="/login.svg" alt="Login" fill className="object-contain lg:object-cover" />
