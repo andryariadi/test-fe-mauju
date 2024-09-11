@@ -1,20 +1,16 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-export const login = async ({ username, password }) => {
+export const auth = async ({ username, password }) => {
   try {
     const res = await axios.post("https://dummyjson.com/auth/login", {
       username,
       password,
     });
 
-    console.log(res, "<----dilogin");
-
     if (res.data && res.data.token) {
       const expiryDate = new Date();
       expiryDate.setDate(expiryDate.getDate() + 30);
-
-      console.log(expiryDate, "<----dilogin");
 
       Cookies.set("token", res.data.token, {
         expires: expiryDate,

@@ -14,17 +14,17 @@ const Header = () => {
 
   const handleLogout = () => {
     Cookie.remove("token");
+
     router.push("/login");
   };
 
-  console.log(currentUser, "<----diheader");
   return (
     <header className="dark:bg-n-7 bg-neutral-100 border border-n-1/10 dark:border-n-1/20 py-3 rounded-md px-5 flex items-center justify-between dark:text-neutral-100 text-n-5">
       <h1 className="text-lg font-semibold">Admin</h1>
 
-      <div className="bg-vilet-500 flex items-center gap-5">
+      <div className="flex items-center gap-5">
         <Search />
-        <div className="bg-sy-700 flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <ThemeSwitch />
           <MdOutlineChat size={20} className="hidden md:block cursor-pointer hover:text-logo transition-all duration-300" aria-label="Chat" role="button" />
           <MdNotifications size={20} className="hidden md:block cursor-pointer hover:text-logo transition-all duration-300" aria-label="Notifications" role="button" />

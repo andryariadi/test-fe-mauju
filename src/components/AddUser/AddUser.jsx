@@ -27,14 +27,12 @@ const AddUser = () => {
     setIsOpen(!isOpen);
   };
 
-  console.log(currentUser, "<---diadduser");
-
   return (
     <>
-      <div className="b-teal-600 border-b border-n-1/10 px-5 py-2 w-full flex items-center justify-between gap-5">
+      <div className="border-b border-n-1/10 px-5 py-2 w-full flex items-center justify-between gap-5">
         <h1 className="text-md md:text-xl">User Lists</h1>
 
-        <div className="b-violet-500 flex items-center justify-between gap-2 md:gap-5">
+        <div className="flex items-center justify-between gap-2 md:gap-5">
           <select
             id=""
             name="sort"

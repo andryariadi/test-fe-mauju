@@ -1,20 +1,20 @@
 "use client";
 
-import { login } from "src/libs/data";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { CiUser } from "react-icons/ci";
 import { IoEyeOutline } from "react-icons/io5";
 import { IoEyeOffOutline } from "react-icons/io5";
 import { z } from "zod";
 import Cookie from "js-cookie";
-import useAuthStore from "src/libs/storeAuth";
 import Link from "next/link";
-import useLogin from "src/hooks/useLogin";
+// import useLogin from "src/hooks/useLogin";
+import useAuthStore from "src/libs/storeAuth";
+import toast from "react-hot-toast";
+import { auth } from "src/libs/data";
 
 const loginSchema = z.object({
   username: z.string().min(1, { message: "Username is required!" }),
@@ -24,9 +24,9 @@ const loginSchema = z.object({
 const LoginPage = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  // const { setAuth } = useAuthStore();
+  const { setAuth } = useAuthStore();
 
-  const { loginForm } = useLogin();
+  // const { loginForm } = useLogin();
 
   useEffect(() => {
     const token = Cookie.get("token");
@@ -43,24 +43,37 @@ const LoginPage = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const handleSubmitLogin = async (data) => {
-    await loginForm(data);
-
-    router.push("/");
+  // First away
+  const onSubmit = async (data) => {
+    try {
+      const user = await auth(data);
+      setAuth(user);
+      router.push("/");
+      toast.success("Login successful!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Login failed!");
+    }
   };
+
+  // Seceond away
+  // const handleSubmitLogin = async (data) => {
+  //   await loginForm(data);
+  //   router.push("/");
+  // };
 
   return (
     <>
-      <section className="bg-ros-500 px-4 py-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-full flex flex-col md:flex-row md:justify-center md:items-center">
+      <section className="px-4 py-6 md:px-8 lg:px-16 xl:px-32 2xl:px-64 h-full flex flex-col md:flex-row md:justify-center md:items-center">
         {/* Image */}
-        <div className="bg-tal-500 relative w-full md:w-1/2 min-h-[40%] md:h-[65%] md:ml-3">
+        <div className="relative w-full md:w-1/2 min-h-[40%] md:h-[65%] md:ml-3">
           <Image src="/login.svg" alt="Login" fill className="object-contain lg:object-cover" />
         </div>
 
         {/* Form container */}
         <div className="dark:bg-n-7 bg-white shadow-md w-full md:w-1/2 max-h-[60%] md:min-h-[35%] lg:min-h-[85%] xl:min-h-[70%] 2xl:min-h-[75%] border border-n-1/10 rounded-xl flex flex-col justify-between overflow-hidden">
           {/* Form */}
-          <form onSubmit={handleSubmit(handleSubmitLogin)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
+          <form onSubmit={handleSubmit(onSubmit)} className="p-6 flex flex-col gap-7 md:gap-10 w-full">
             <div>
               <h1 className="text-2xl font-semibold">
                 Login to <span className="text-logo">iProc</span>

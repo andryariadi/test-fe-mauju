@@ -12,9 +12,9 @@ const MenuSidebar = () => {
   const [isOpenAdmin, setIsOpenAdmin] = useState(false);
   const [isOpenProduct, setIsOpenProduct] = useState(false);
   return (
-    <div className="bg-sy-500 flex flex-col gap-5 dark:text-neutral-200 text-n-5">
+    <div className="flex flex-col gap-5 dark:text-neutral-200 text-n-5">
       {/* Dashboard */}
-      <div className="bg-ros-500 py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
+      <div className="py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
         <div className="flex items-center gap-3">
           <TbLayoutDashboardFilled size={20} />
           <h2 className="text-base">Dashboard</h2>
@@ -23,7 +23,7 @@ const MenuSidebar = () => {
       </div>
 
       {/* Admin */}
-      <div className="bg-ros-500 py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
+      <div className="py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
         <div className="flex items-center gap-3">
           <HiMiniUserGroup size={20} />
           <h2 className="text-base">Admin Management</h2>
@@ -33,7 +33,7 @@ const MenuSidebar = () => {
       {isOpenAdmin && <MenuAdmin />}
 
       {/* Product */}
-      <div className="bg-ros-500 py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
+      <div className="py-3 px-1 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300">
         <div className="flex items-center gap-3">
           <HiShoppingBag size={20} />
           <h2 className="text-base">Product</h2>

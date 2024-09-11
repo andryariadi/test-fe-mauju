@@ -12,8 +12,6 @@ const useLogin = () => {
         password,
       });
 
-      console.log(res, "<----diloginhook");
-
       if (res.status !== 200) {
         throw new Error("Invalid credentials");
       }

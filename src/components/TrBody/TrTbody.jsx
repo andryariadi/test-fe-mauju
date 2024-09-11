@@ -64,18 +64,16 @@ const TrBody = ({ user }) => {
     }
   };
 
-  console.log(currentUser, "<----diTrBody");
-
   return (
     <>
       {users.map((user) => (
         <tr key={user.id} className="border-b dark:border-n-1/10 border-n-2/50">
-          <th className="b-violet-500 text-start py-3 lg:w-[15%] 2xl:w-[10%] capitalize">{user.username}</th>
-          <th className="b-sky-500 text-start py-3 lg:w-[15%] 2xl:w-[10%] capitalize">{user.gender}</th>
-          <th className="hidden lg:table-cell b-teal-500 text-start py-3 lg:w-[27%] 2xl:w-[20%]">{user.phone}</th>
-          <th className="hidden lg:table-cell b-gray-500 text-start py-3 lg:w-[27%] 2xl:w-[25%]">{user.address.address}</th>
-          <th className="hidden 2xl:table-cell b-amber-500 text-start py-3 2xl:w-[10%]">{user.email}</th>
-          <th className="b-sky-500 text-start py-3 lg:w-[16%] 2xl:w-[10%]">
+          <th className="text-start py-3 lg:w-[15%] 2xl:w-[10%] capitalize">{user.username}</th>
+          <th className="text-start py-3 lg:w-[15%] 2xl:w-[10%] capitalize">{user.gender}</th>
+          <th className="hidden lg:table-cell text-start py-3 lg:w-[27%] 2xl:w-[20%]">{user.phone}</th>
+          <th className="hidden lg:table-cell text-start py-3 lg:w-[27%] 2xl:w-[25%]">{user.address.address}</th>
+          <th className="hidden 2xl:table-cell text-start py-3 2xl:w-[10%]">{user.email}</th>
+          <th className="text-start py-3 lg:w-[16%] 2xl:w-[10%]">
             <div className="flex justify-between">
               <button type="button" onClick={() => handleProfileClick(user.id)}>
                 <HiViewGrid size={20} className="cursor-pointer text-teal-500" />

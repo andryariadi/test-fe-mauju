@@ -8,15 +8,13 @@ const UserInformation = ({ user }) => {
   const { setAuth, currentUser } = useAuthStore();
 
   useEffect(() => {
-    if (user && user.id !== currentUser.id) {
+    if (user && user.id !== currentUser?.id) {
       setAuth(user);
     }
   }, [user, currentUser, setAuth]);
 
-  console.log({ user, currentUser }, "<-----diuserinformation");
-
   return (
-    <div className="bg-tal-500 dark:text-neutral-200 text-n-5 h-24 flex items-center justify-start">
+    <div className="dark:text-neutral-200 text-n-5 h-24 flex items-center justify-start">
       <div className="flex items-center gap-3">
         {/* Avatar */}
         <div className="dark:bg-n-7 bg-neutral-50 p-[6px] border dark:border-n-1/10 border-n-2 rounded-full flex items-center justify-center">

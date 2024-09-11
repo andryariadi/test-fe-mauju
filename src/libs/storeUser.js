@@ -4,7 +4,6 @@ const useUserStore = create((set) => ({
   users: [],
   setUsers: (users) => {
     set({ users });
-    console.log(users, "<-----distoree");
   },
 
   addUser: (user) => set((state) => ({ users: [user, ...state.users] })),

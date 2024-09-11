@@ -11,7 +11,6 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-// Tentukan rute yang akan dijalankan middleware-nya
 export const config = {
   matcher: ["/", "/user/:path*"],
 };

@@ -18,11 +18,11 @@ export default async function Home() {
     console.log(error.message);
   }
 
-  console.log({ user, token }, "<---dihomepage");
+  console.log(user, "<----ditableuser");
 
   return (
     <>
-      <section className="b-amber-500 flex gap-5 h-max md:h-full p-5">
+      <section className="flex gap-5 h-max md:h-full p-5">
         <aside className="hidden dark:bg-n-7 bg-white dark:border dark:border-n-1/10 md:w-[35%] lg:w-[27%] 2xl:w-[20%] p-5 rounded-md md:flex flex-col gap-5">
           {/* Top */}
           <div className="border-b dark:border-n-1/10 border-n-2/50">

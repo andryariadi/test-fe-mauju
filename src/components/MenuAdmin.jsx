@@ -9,7 +9,7 @@ const MenuAdmin = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <div className="bg-ros-500 py-3 px-8 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300 dark:text-neutral-200 text-n-5">
+      <div className="py-3 px-8 rounded-md flex items-center justify-between dark:hover:bg-n-8 hover:bg-neutral-100 transition-all duration-300 dark:text-neutral-200 text-n-5">
         <div className="flex items-center gap-3">
           <FaUser size={13} />
           <h3 className="text-base">User</h3>

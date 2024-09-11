@@ -40,7 +40,6 @@ const UpdateUser = ({ user, isOpen, setIsOpen }) => {
         },
       };
       const newUpdatedUser = await updateUser({ id: user.id, ...updatedData });
-      // setUsers(users.map((u) => (u.id === newUpdatedUser.id ? newUpdatedUser : u))); // jika hanya menggunakan setUsers di useUserStore
       inUpdateUser(newUpdatedUser);
       toast.success("User updated successfully!");
     } catch (error) {
@@ -63,7 +62,7 @@ const UpdateUser = ({ user, isOpen, setIsOpen }) => {
           </h1>
         </div>
 
-        <div className="bg-ambr-500 flex flex-wrap items-center justify-between gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-5">
           <div className="flex flex-1 flex-col gap-2">
             <label className="text-sm text-n-3">Username</label>
             <div className="flex items-center rounded-lg dark:bg-n-7 bg-neutral-200 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">

@@ -9,12 +9,9 @@ import { CiLocationOn } from "react-icons/ci";
 import { CiPhone } from "react-icons/ci";
 import { IoCloseCircle } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createUser } from "src/libs/data";
-import useUserStore from "src/libs/storeUser";
 import useAddUser from "src/hooks/useAddUser";
 
 const schema = z.object({
@@ -32,7 +29,6 @@ const UserForm = ({ isOpen, setIsOpen }) => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const { addUser } = useUserStore();
   const { createUserForm } = useAddUser();
 
   const {
@@ -44,7 +40,6 @@ const UserForm = ({ isOpen, setIsOpen }) => {
   });
 
   const handleSubmitUser = async (data) => {
-    console.log(data, "<----diuserform");
     await createUserForm(data);
   };
 
@@ -63,7 +58,7 @@ const UserForm = ({ isOpen, setIsOpen }) => {
         </div>
 
         {/* Form Field */}
-        <div className="bg-ambr-500 flex flex-wrap items-center justify-between gap-10">
+        <div className="flex flex-wrap items-center justify-between gap-10">
           <div className="flex flex-1 flex-col gap-2 relative">
             <label className="text-sm text-n-3">Username</label>
             <div className="flex items-center rounded-lg dark:bg-n-7 bg-neutral-200 gap-3 border border-n-1/10 hover:border-logo transition-all duration-300">
