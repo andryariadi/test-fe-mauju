@@ -27,3 +27,4 @@ How to use the application:
    password: "alexanderjpass",
    Jika ingin menggunakan user yang lain bisa mengunjungi alamat ini https://dummyjson.com/user
 3. Setelah proses athentication maka bisa melakukan CRUD, seperti yang dijelaskan sebelumnya jika rolenya bukan admin maka tidak bisa melakukan create dan delete users
+4. Semua berjalan lancar disisi developmentnya
